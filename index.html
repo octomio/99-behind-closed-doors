@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>99 Behind Closed Doors</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>99 Behind Closed Doors</h1>
+        <div id="feed"></div>
+    </div>
+    <script>
+        fetch('posts.json')
+        .then(response => response.json())
+        .then(posts => {
+            const feed = document.getElementById('feed');
+            posts.reverse().forEach(post => {
+                const entry = document.createElement('div');
+                entry.className = 'entry';
+
+                const img = document.createElement('img');
+                img.src = post.image;
+                img.alt = "Image";
+
+                const caption = document.createElement('p');
+                caption.textContent = post.caption;
+
+                const meta = document.createElement('small');
+                meta.textContent = post.date;
+
+                entry.appendChild(img);
+                entry.appendChild(caption);
+                entry.appendChild(meta);
+                feed.appendChild(entry);
+            });
+        });
+    </script>
+</body>
+</html>
