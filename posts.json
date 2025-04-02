@@ -1,12 +1,12 @@
 [
   {
-    "file": "images/Cum.jpeg",
-    "caption": "fresh batch",
+    "file": "https://raw.githubusercontent.com/octomio/99-behind-closed-doors/main/images/Cum.jpeg",
+    "caption": "Fresh Batch",
     "date": "2025-04-01"
   },
   {
-    "file": "goth.jpeg",
-    "caption": "nice pose",
-    "date": "2025-04-01"
+    "file": "https://raw.githubusercontent.com/octomio/99-behind-closed-doors/main/images/goth.jpeg",
+    "caption": "nice view",
+    "date": "2025-04-02"
   }
 ]
