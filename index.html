@@ -21,24 +21,27 @@
 
     <!-- JavaScript to fetch and display posts -->
     <script>
-        fetch('https://raw.githubusercontent.com/octomio/99-behind-closed-doors/main/posts.json')
-            .then(response => response.json())
-            .then(posts => {
-                const postsContainer = document.getElementById('posts');
-                posts.forEach(post => {
-                    const postElement = document.createElement('div');
-                    postElement.classList.add('post');
-                    
-                    postElement.innerHTML = `
-                        <img src="${post.file}" alt="Post Image" />
-                        <p><strong>Caption:</strong> ${post.caption}</p>
-                        <p><strong>Date:</strong> ${post.date}</p>
-                    `;
-                    
-                    postsContainer.appendChild(postElement);
-                });
-            })
-            .catch(error => console.error('Error loading posts:', error));
-    </script>
-</body>
+    fetch('https://raw.githubusercontent.com/octomio/99-behind-closed-doors/main/posts.json')
+        .then(response => response.json())
+        .then(posts => {
+            const postsContainer = document.getElementById('posts');
+            
+            // Loop through all the posts in posts.json
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.classList.add('post');
+                
+                postElement.innerHTML = `
+                    <img src="${post.file}" alt="Post Image" />
+                    <p><strong>Caption:</strong> ${post.caption}</p>
+                    <p><strong>Date:</strong> ${post.date}</p>
+                `;
+                
+                postsContainer.appendChild(postElement);  // Append each post
+            });
+        })
+        .catch(error => {
+            console.error('Error loading posts:', error);
+        });
+</script></body>
 </html>
