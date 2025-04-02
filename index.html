@@ -2,40 +2,65 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>99 Behind Closed Doors</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <title>My Blog</title>
+    <style>
+        /* Basic styles for the posts */
+        #posts {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .post {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .post img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .post p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>99 Behind Closed Doors</h1>
-        <div id="feed"></div>
-    </div>
+
+    <h1>My Blog</h1>
+
+    <!-- Container for the posts -->
+    <div id="posts"></div>
+
+    <!-- JavaScript to fetch and display posts -->
     <script>
-        fetch('posts.json')
-        .then(response => response.json())
-        .then(posts => {
-            const feed = document.getElementById('feed');
-            posts.reverse().forEach(post => {
-                const entry = document.createElement('div');
-                entry.className = 'entry';
-
-                const img = document.createElement('img');
-                img.src = post.image;
-                img.alt = "Image";
-
-                const caption = document.createElement('p');
-                caption.textContent = post.caption;
-
-                const meta = document.createElement('small');
-                meta.textContent = post.date;
-
-                entry.appendChild(img);
-                entry.appendChild(caption);
-                entry.appendChild(meta);
-                feed.appendChild(entry);
-            });
-        });
+        // Fetch posts from the raw GitHub URL of the posts.json
+        fetch('https://raw.githubusercontent.com/octomio/99-behind-closed-doors/main/posts.json')
+            .then(response => response.json())
+            .then(posts => {
+                const postsContainer = document.getElementById('posts');
+                
+                // Loop through each post and create HTML elements to display them
+                posts.forEach(post => {
+                    const postElement = document.createElement('div');
+                    postElement.classList.add('post');
+                    
+                    // Add the image, caption, and date to the post element
+                    postElement.innerHTML = `
+                        <img src="${post.file}" alt="Post Image" />
+                        <p><strong>Caption:</strong> ${post.caption}</p>
+                        <p><strong>Date:</strong> ${post.date}</p>
+                    `;
+                    
+                    // Append the post to the posts container
+                    postsContainer.appendChild(postElement);
+                });
+            })
+            .catch(error => console.error('Error loading posts:', error));
     </script>
+
 </body>
 </html>
